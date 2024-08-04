@@ -1,0 +1,255 @@
+{
+    "info": {
+      "name": "Task Manager API",
+      "_postman_id": "00000000-0000-0000-0000-000000000000",
+      "description": "",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Sign Up",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"username\": \"uniqueUser\",\"email\": \"test@example.com\",\"password\": \"password\"}"
+          },
+          "url": {
+            "raw": "http://localhost:5000/api/auth/signup",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "5000",
+            "path": [
+              "api",
+              "auth",
+              "signup"
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Log In",
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "exec": [
+                "var jsonData = JSON.parse(responseBody);",
+                "pm.environment.set(\"jwt_token\", jsonData.token);"
+              ],
+              "type": "text/javascript"
+            }
+          }
+        ],
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"email\": \"test@example.com\",\"password\": \"password\"}"
+          },
+          "url": {
+            "raw": "http://localhost:5000/api/auth/login",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "5000",
+            "path": [
+              "api",
+              "auth",
+              "login"
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Add Task",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            },
+            {
+              "key": "Authorization",
+              "value": "{{jwt_token}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"DO Something\",\"description\": \"5star\"}"
+          },
+          "url": {
+            "raw": "http://localhost:5000/api/tasks",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "5000",
+            "path": [
+              "api",
+              "tasks"
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Get Tasks",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "{{jwt_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:5000/api/tasks",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "5000",
+            "path": [
+              "api",
+              "tasks"
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Edit Task",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "type": "text"
+            },
+            {
+              "key": "Authorization",
+              "value": "{{jwt_token}}",
+              "type": "text"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\"title\": \"Updated Title\",\"description\": \"Updated Description\"}"
+          },
+          "url": {
+            "raw": "http://localhost:5000/api/tasks/:id",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "5000",
+            "path": [
+              "api",
+              "tasks",
+              ":id"
+            ],
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Delete Task",
+        "request": {
+          "method": "DELETE",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "{{jwt_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:5000/api/tasks/:id",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "5000",
+            "path": [
+              "api",
+              "tasks",
+              ":id"
+            ],
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Complete Task",
+        "request": {
+          "method": "PATCH",
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "{{jwt_token}}",
+              "type": "text"
+            }
+          ],
+          "url": {
+            "raw": "http://localhost:5000/api/tasks/:id/completed",
+            "protocol": "http",
+            "host": [
+              "localhost"
+            ],
+            "port": "5000",
+            "path": [
+              "api",
+              "tasks",
+              ":id",
+              "completed"
+            ],
+            "variable": [
+              {
+                "key": "id",
+                "value": ""
+              }
+            ]
+          }
+        },
+        "response": []
+      }
+    ]
+  }
+  
